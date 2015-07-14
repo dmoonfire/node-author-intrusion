@@ -115,6 +115,7 @@ export class Content implements TokenContainer {
     constructor() {
         this.lines = new Array<Line>();
         this.tokens = new Array<Token>();
+        this.processed = new Array<string>();
     }
 
     path: string;
