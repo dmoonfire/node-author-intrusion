@@ -28,16 +28,42 @@ export class Location {
  * a stemmed version of a word.
  */
 export class Token {
-  constructor(location: Location, text: string)
+  constructor(location: Location, text: string, normalized?: string)
   {
+    // If we don't have a normalized text, then use the text.
+    if (!normalized) {
+        normalized = text;
+    }
+
     this.location = location;
-    this.text = text.toLowerCase();
-    this.original = text;
+    this.normalized = normalized;
+    this.text = text;
   }
 
+  /**
+   * The location of the token within the content, this includes both the start
+   * and end locations.
+   */
   public location: Location;
+
+  /**
+   * The original text within the content.
+   */
   public text: string;
-  public original: string;
+
+  /**
+   * A normalized version of the text used for processing.
+   */
+  public normalized: string;
+
+  /**
+   * A stemmed version of the normalized text.
+   */
+  public stem: string;
+
+  /**
+   * The token index within the entire contents.
+   */
   public index: number;
 }
 
