@@ -14,6 +14,7 @@ declare module "node-author-intrusion" {
         normalized: string;
         stem: string;
         index: number;
+        partOfSpeech: string;
     }
     export interface TokenContainer {
         tokens: Token[];
