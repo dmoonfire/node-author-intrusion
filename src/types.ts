@@ -191,6 +191,46 @@ export interface AnalysisOutput {
     writeError(message: string, location: Location): void;
 }
 
+export class MemoryAnalysisOutput implements AnalysisOutput {
+    constructor()
+    {
+        this.messages = [];
+    }
+
+    public messages: any[];
+
+    public writeStart() {
+    }
+
+    public writeEnd() {
+    }
+
+    public writeInfo(message: string): void {
+    }
+
+    public writeWarning(message: string, location: Location): void {
+        this.writeMessage("warning", message, location);
+    }
+
+    public writeError(message: string, location: Location) {
+        this.writeMessage("error", message, location);
+    }
+
+    private writeMessage(type: string, message: string, location: Location) {
+        var result = {
+            type: type,
+            text: message,
+            filePath: location.path,
+            range: [
+                [location.beginLine, location.beginColumn],
+                [location.endLine, location.endColumn]
+            ]
+        };
+
+        this.messages.push(result);
+    }
+}
+
 export class AnalysisArguments {
     content: Content;
     analysis: Analysis;

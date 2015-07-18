@@ -56,6 +56,16 @@ declare module "node-author-intrusion" {
         writeWarning(message: string, location: Location): void;
         writeError(message: string, location: Location): void;
     }
+    export class MemoryAnalysisOutput implements AnalysisOutput {
+        constructor();
+        messages: any[];
+        writeStart(): void;
+        writeEnd(): void;
+        writeInfo(message: string): void;
+        writeWarning(message: string, location: Location): void;
+        writeError(message: string, location: Location): void;
+        private writeMessage(type, message, location);
+    }
     export class AnalysisArguments {
         content: Content;
         analysis: Analysis;
